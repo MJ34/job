@@ -67,13 +67,14 @@ public class CompanyController {
 
 		model.addAttribute("jobNotices", jobs);
 		model.addAttribute("currentUser",currentUser);
-		return "dashboard/hr/job/index";
+		return "company-user/job-notice-list";
 	}
 
 	@RequestMapping(value = "/job-notices/saveJobNotice", method = RequestMethod.POST)
 	public String saveBook(@ModelAttribute("jobNotice") JobNotice jobs) {
 		jobNoticeService.saveJobs(jobs);
-		return "redirect:/company/job-notices";
+		/* return "redirect:/dashboard/hr/job/index"; */
+		return "redirect:/company/main";
 	}
 
 
