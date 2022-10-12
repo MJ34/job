@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mujidev.model.Company;
-import com.mujidev.model.JobNotice;
 
 public interface CompanyService {
 
@@ -19,4 +18,5 @@ public interface CompanyService {
   public void updateCompany(Company company);
 
   public Company findOne(Long theId);
+
 }

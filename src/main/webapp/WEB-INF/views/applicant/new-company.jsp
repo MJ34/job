@@ -65,12 +65,12 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label class="col-sm-4 col-md-3 col-lg-3 control-label">Number of Designers</label>
                         <div class="col-sm-8 col-md-6 col-lg-5">
                             <form:input type="text" class="form-control" id="numOfDesigner" path="numOfDesigner"/>
                         </div>
-                    </div>
+                    </div> -->
 
                     <br/>
                     <div class="form-group">

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mujidev.dao.UserRepository;
 import com.mujidev.enums.UserType;
-import com.mujidev.model.User;
+import com.mujidev.model.Users;
 
 @Controller
 public class UserController {
@@ -19,7 +19,7 @@ public class UserController {
   }
 
   @RequestMapping(value = "/saveNewUser", method = RequestMethod.POST)
-  public String saveUser(@ModelAttribute("newUser") User user) {
+  public String saveUser(@ModelAttribute("newUser") Users user) {
 
     user.setActivated(true);
     user.setUserType(UserType.USER);

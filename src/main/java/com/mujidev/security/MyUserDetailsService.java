@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mujidev.enums.UserType;
-import com.mujidev.model.User;
+import com.mujidev.model.Users;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
@@ -23,7 +23,7 @@ public class MyUserDetailsService implements UserDetailsService {
   @Override
   @Transactional
   public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-    User user = userService.findUserByUserName(userName);
+    Users user = userService.findUserByUserName(userName);
     List<GrantedAuthority> authorities = getUserAuthority(user.getUserType());
     return buildUserForAuthentication(user, authorities);
   }
@@ -34,7 +34,7 @@ public class MyUserDetailsService implements UserDetailsService {
     return grantedAuthorities;
   }
 
-  private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
+  private UserDetails buildUserForAuthentication(Users user, List<GrantedAuthority> authorities) {
     return new org.springframework.security.core.userdetails.User(user.getUsername(),
         user.getPassword(), user.getActivated(), true, true, true, authorities);
   }

@@ -7,10 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name = "COMPANY")
+@Table(name = "hrm_company")
 public class Company {
 
   @Id
@@ -27,7 +28,7 @@ public class Company {
   private String tel;
 
   @NotBlank
-  @Column(name = "email", nullable = false,unique = true)
+  @Column(name = "email", nullable = false, unique = true)
   private String email;
 
   @NotBlank
@@ -36,10 +37,6 @@ public class Company {
 
   @Column(name = "webSiteUrl", nullable = false)
   private String webSiteUrl;
-
-  @NotNull
-  @Column(name = "numOfDesigner", nullable = false)
-  private Integer numOfDesigner = 0;
 
   @NotNull
   @Column(name = "userId", nullable = false)
@@ -93,14 +90,6 @@ public class Company {
     this.webSiteUrl = webSiteUrl;
   }
 
-  public Integer getNumOfDesigner() {
-    return numOfDesigner;
-  }
-
-  public void setNumOfDesigner(Integer numOfDesigner) {
-    this.numOfDesigner = numOfDesigner;
-  }
-
   public Long getUserId() {
     return userId;
   }
@@ -108,4 +97,11 @@ public class Company {
   public void setUserId(Long userId) {
     this.userId = userId;
   }
+
+  @Override
+  public String toString() {
+    return "Company [id=" + id + ", title=" + title + ", tel=" + tel + ", email=" + email + ", address=" + address
+        + ", webSiteUrl=" + webSiteUrl + ", userId=" + userId + "]";
+  }
+
 }

@@ -67,13 +67,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-4 col-md-3 col-lg-3 control-label">Vacancy</label>
-                        <div class="col-sm-8 col-md-6 col-lg-5">
-                            <form:input type="text" class="form-control" id="numOfDesigner" path="numOfDesigner"/>
-                        </div>
-                    </div>
-
                     <br/>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-md-offset-3 col-lg-offset-3 col-sm-8 col-md-9 col-lg-9">

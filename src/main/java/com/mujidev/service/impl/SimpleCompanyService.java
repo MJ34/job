@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mujidev.dao.CompanyRepository;
 import com.mujidev.enums.UserType;
 import com.mujidev.model.Company;
-import com.mujidev.model.User;
+import com.mujidev.model.Users;
 import com.mujidev.security.UserService;
 import com.mujidev.service.CompanyService;
 
@@ -39,7 +39,7 @@ public class SimpleCompanyService implements CompanyService {
   @Override
   public List<Company> findCompanyByCurrentUser() {
 
-    User currentUser = userService.getCurrentUser();
+    Users currentUser = userService.getCurrentUser();
 
     if (UserType.ADMIN.equals(currentUser.getUserType())) {
       return companyRepository.findAll();
@@ -48,7 +48,6 @@ public class SimpleCompanyService implements CompanyService {
     } else {
       return Collections.emptyList();
     }
-
 
   }
 
@@ -61,6 +60,5 @@ public class SimpleCompanyService implements CompanyService {
   public Company findOne(Long theId) {
     return companyRepository.findOne(theId);
   }
-
 
 }

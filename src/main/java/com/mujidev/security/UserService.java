@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mujidev.dao.UserRepository;
-import com.mujidev.model.User;
+import com.mujidev.model.Users;
 
 @Service
 public class UserService {
@@ -18,21 +18,21 @@ public class UserService {
     this.userRepository = userRepository;
   }
 
-  public User findUserByEmail(String email) {
+  public Users findUserByEmail(String email) {
     return userRepository.findByMail(email);
   }
 
-  public User findUserByUserName(String userName) {
+  public Users findUserByUserName(String userName) {
     return userRepository.findByUsername(userName);
   }
 
-  public User getCurrentUser(){
+  public Users getCurrentUser(){
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     return findUserByUserName(auth.getName());
   }
 
   @Transactional
-  public User saveUser(User user) {
+  public Users saveUser(Users user) {
     user.setActivated(true);
     return userRepository.save(user);
   }

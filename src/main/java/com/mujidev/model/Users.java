@@ -1,6 +1,5 @@
-package com.cihangir.model;
+package com.mujidev.model;
 
-import com.cihangir.enums.UserType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,14 +9,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.mujidev.enums.UserType;
+
 @Entity
-@Table(name = "User")
-public class User {
+@Table(name = "Users")
+public class Users {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
-
 
   @Column(name = "firstname", nullable = false)
   private String firstname;

@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +22,7 @@ import com.mujidev.model.Applicant;
 import com.mujidev.model.Company;
 import com.mujidev.model.JobApply;
 import com.mujidev.model.JobNotice;
-import com.mujidev.model.User;
+import com.mujidev.model.Users;
 import com.mujidev.security.UserService;
 import com.mujidev.service.CompanyService;
 import com.mujidev.service.JobNoticeService;
@@ -29,6 +30,8 @@ import com.mujidev.service.JobNoticeService;
 @Controller
 @RequestMapping("/company")
 public class CompanyController {
+
+	JobNotice jobNotice;
 
 	private final CompanyService companyService;
 
@@ -61,20 +64,22 @@ public class CompanyController {
 	@RequestMapping(value = "/job-notices", method = RequestMethod.GET)
 	public String getJobNotices(Model model) {
 
-		User currentUser = getCurrentUser();
+		Users currentUser = getCurrentUser();
 		List<Company> companies = companyService.findCompanyByCurrentUser();
 		Iterable<JobNotice> jobs = jobNoticeService.findAllByCompanyIdIn(companies);
 
 		model.addAttribute("jobNotices", jobs);
 		model.addAttribute("currentUser",currentUser);
-		return "company-user/job-notice-list";
+		
+		return "dashboard/hr/job/index";
+		//return "company-user/job-notice-list";
 	}
 
 	@RequestMapping(value = "/job-notices/saveJobNotice", method = RequestMethod.POST)
 	public String saveBook(@ModelAttribute("jobNotice") JobNotice jobs) {
 		jobNoticeService.saveJobs(jobs);
 		/* return "redirect:/dashboard/hr/job/index"; */
-		return "redirect:/company/main";
+		return "redirect:/company/job-notices";
 	}
 
 
@@ -124,16 +129,11 @@ public class CompanyController {
 		return "company-user/applicant-info";
 	}
 
-
-
-
-
-
-	@RequestMapping(value = "/job-notices/delete", method = RequestMethod.GET)
-	public String deleteJobNotice(@RequestParam("id") Long theId) {
+	@RequestMapping(value = "/job-notices/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+	public String deleteJobNotice(@PathVariable Long id) {
 
 		//delete the book
-		jobNoticeService.deleteBook(theId);
+		jobNoticeService.deleteJobs(id);
 
 		return "redirect:/company/job-notices";
 	}
@@ -185,7 +185,7 @@ public class CompanyController {
 	public String getCompanyList(Model model) {
 
 
-		User currentUser = getCurrentUser();
+		Users currentUser = getCurrentUser();
 		Iterable<Company> companies = companyService.findAllByUserId(currentUser.getId());
 
 		model.addAttribute("companies", companies);
@@ -198,7 +198,7 @@ public class CompanyController {
 	@RequestMapping(value = "/saveCompany", method = RequestMethod.POST)
 	public String saveBook(@ModelAttribute("newCompany") Company company) {
 
-		User currentUser = getCurrentUser();
+		Users currentUser = getCurrentUser();
 		company.setUserId(currentUser.getId());
 		companyService.saveCompany(company);
 		return "redirect:/company/company-list";
@@ -212,7 +212,7 @@ public class CompanyController {
 		userTypes.put("COMPANY_USER","HR");
 
 		theModel.addAttribute("userTypes", userTypes);
-		User theUser = getCurrentUser();
+		Users theUser = getCurrentUser();
 		theModel.addAttribute("currentUser", theUser);
 
 		return "company-user/user-info";
@@ -222,11 +222,11 @@ public class CompanyController {
 
 	private void setCurrentUser(Model model){
 
-		User currentUser = getCurrentUser();
+		Users currentUser = getCurrentUser();
 		model.addAttribute("currentUser", currentUser);
 	}
 
-	private User getCurrentUser(){
+	private Users getCurrentUser(){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		return userService.findUserByUserName(auth.getName());
 	}

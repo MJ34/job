@@ -36,7 +36,6 @@
                 <th>Address</th>
                 <th>No. Handphone</th>
                 <th>Email</th>
-                <th>Vacancy</th>
                 <th class="text-center">Operations</th>
             </tr>
             </thead>
@@ -66,9 +65,6 @@
                     </td>
                     <td>
                         <c:out value="${company.email}" />
-                    </td>
-                    <td>
-                        <c:out value="${company.numOfDesigner}" />
                     </td>
                     <td class="text-center">
                         <a href="${updateLink}" class="btn btn-success btn-xs">

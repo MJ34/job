@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mujidev.dao.UserRepository;
-import com.mujidev.model.User;
+import com.mujidev.model.Users;
 import com.mujidev.security.UserService;
 
 @Controller
@@ -31,15 +31,14 @@ public class LoginController {
     return "common/login";
   }
 
-
   @RequestMapping(value = "/showCreateNewUser", method = RequestMethod.GET)
   public String showCreateNewUser(Model theModel) {
-    User theBook=new User();
+    Users theBook = new Users();
 
     theModel.addAttribute("newUser", theBook);
 
     Map<String, String> userTypes = new HashMap<>();
-    userTypes.put("USER","Job seeker");
+    userTypes.put("USER", "Job seeker");
     /* userTypes.put("COMPANY_USER","HR"); */
 
     theModel.addAttribute("userTypes", userTypes);
@@ -48,18 +47,16 @@ public class LoginController {
   }
 
   @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
-  public String updateUser(@ModelAttribute("currentUser") User user) {
+  public String updateUser(@ModelAttribute("currentUser") Users user) {
 
-    User user1 = getCurrentUser();
+    Users user1 = getCurrentUser();
 
     user.setUserType(user1.getUserType());
     userRepository.save(user);
     return "redirect:/login";
   }
 
-
-
-  private User getCurrentUser(){
+  private Users getCurrentUser() {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     return userService.findUserByUserName(auth.getName());
   }

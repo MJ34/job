@@ -30,7 +30,7 @@
         </a>
     </div>
     <div class="row">
-        <table id="example" class="display" style="width:100%">
+        <table class="table table-bordered">
             <thead>
             <tr>
                 <th>Title</th>
@@ -61,9 +61,9 @@
                 </c:url>
 
                 <!-- construct an "delete" link with book id -->
-                <c:url var="deleteLink" value="${contextPath}/company/job-notices/delete">
+               <!--  <c:url var="deleteLink" value="${contextPath}/company/job-notices/delete">
                     <c:param name="id" value="${jobNotice.id}" />
-                </c:url>
+                </c:url> -->
 
                 <tr>
                     <td>
@@ -96,9 +96,9 @@
                         <a href="${updateLink}" class="btn btn-success btn-sm">
                             <span class="glyphicon glyphicon-edit"></span>
                         </a>
-                        <a href="${deleteLink}"
-                           onclick="return confirm('Are you sure you want to delete this?')"
-                           class="btn btn-danger btn-sm">
+                        <a onclick="return confirm('Are you sure you want to delete this?')"
+                        href="/company/job-notices/delete/${jobNotice.id}" 
+                         class="btn btn-danger btn-sm">
                             <span class="glyphicon glyphicon-trash"></span>
                         </a>
                     </td>

@@ -1,6 +1,7 @@
 package com.mujidev.service;
 
 import java.util.List;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mujidev.model.Company;
@@ -15,11 +16,11 @@ public interface JobNoticeService {
 
     Iterable<JobNotice> findAllByCompanyIdIn(List<Company> companies);
 
-    public void updateBook(JobNotice jobs);
+    public void updateJobs(JobNotice jobs);
 
     public JobNotice findOne(Long theId);
 
-    public void deleteBook(Long theId);
+    void deleteJobs(Long id);
 
     Iterable<JobNotice> findAll();
 }

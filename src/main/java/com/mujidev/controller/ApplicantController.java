@@ -24,7 +24,7 @@ import com.mujidev.dao.JobApplyRepository;
 import com.mujidev.model.Applicant;
 import com.mujidev.model.JobApply;
 import com.mujidev.model.JobNotice;
-import com.mujidev.model.User;
+import com.mujidev.model.Users;
 import com.mujidev.security.UserService;
 import com.mujidev.service.CompanyService;
 import com.mujidev.service.JobNoticeService;
@@ -60,7 +60,7 @@ public class ApplicantController {
 
   @RequestMapping(value = "/info", method = RequestMethod.GET)
   public String showApplicantInfo(Model model) {
-    User currentUser = getCurrentUser();
+    Users currentUser = getCurrentUser();
     setCurrentUser(currentUser, model);
 
     Applicant applicant = applicantRepository.findByUserId(currentUser.getId())
@@ -76,7 +76,7 @@ public class ApplicantController {
   @RequestMapping(value = "/saveApplicant", method = RequestMethod.POST)
   public String saveBook(@ModelAttribute("applicantInfo") Applicant applicant) {
 
-    User currentUser = getCurrentUser();
+    Users currentUser = getCurrentUser();
     applicant.setUserId(currentUser.getId());
     applicant.setUser(null);
     applicantRepository.save(applicant);
@@ -88,7 +88,7 @@ public class ApplicantController {
   @RequestMapping(value = "/job-notices", method = RequestMethod.GET)
   public String getJobNotices(Model model) {
 
-    User currentUser = getCurrentUser();
+    Users currentUser = getCurrentUser();
     List<ApplicantJobNoticeReportVM> applicantJobNoticeReports = new ArrayList<>();
 
     Iterable<JobNotice> jobNotices = jobNoticeService.findAll();
@@ -116,7 +116,7 @@ public class ApplicantController {
   @RequestMapping(value = "/applyJobNotice", method = RequestMethod.GET)
   public String applyJobNotice(@RequestParam("id") Long id) {
 
-    User currentUser = getCurrentUser();
+    Users currentUser = getCurrentUser();
     Applicant applicant = applicantRepository.findByUserId(currentUser.getId()).orElseThrow(
         () -> new IllegalArgumentException("User Information is not available in the system."));
 
@@ -138,7 +138,7 @@ public class ApplicantController {
     userTypes.put("COMPANY_USER","HR");
 
     theModel.addAttribute("userTypes", userTypes);
-    User theUser = getCurrentUser();
+    Users theUser = getCurrentUser();
     theModel.addAttribute("currentUser", theUser);
 
     return "dashboard/users/profile/index";
@@ -146,15 +146,15 @@ public class ApplicantController {
 
 
   private void setCurrentUser(Model model) {
-    User currentUser = getCurrentUser();
+    Users currentUser = getCurrentUser();
     model.addAttribute("currentUser", currentUser);
   }
 
-  private void setCurrentUser(User user, Model model) {
+  private void setCurrentUser(Users user, Model model) {
     model.addAttribute("currentUser", user);
   }
 
-  private User getCurrentUser() {
+  private Users getCurrentUser() {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     return userService.findUserByUserName(auth.getName());
   }

@@ -2,6 +2,7 @@ package com.mujidev.service.impl;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,7 +42,7 @@ public class SimpleJobNoticeService implements JobNoticeService {
   }
 
   @Override
-  public void updateBook(JobNotice jobs) {
+  public void updateJobs(JobNotice jobs) {
     jobNoticeRepository.save(jobs);
   }
 
@@ -52,8 +53,8 @@ public class SimpleJobNoticeService implements JobNoticeService {
   }
 
   @Override
-  public void deleteBook(Long theId) {
-    jobNoticeRepository.delete(theId);
+  public void deleteJobs(Long id) {
+    jobNoticeRepository.deleteById(id);
   }
 
 

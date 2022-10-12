@@ -61,7 +61,7 @@ background: linear-gradient(to right, #f5af19, #f12711); /* W3C, IE 10+/ Edge, F
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="${pageContext.request.contextPath}/company/job-notices">
+          <a class="nav-link " href="${contextPath}/company/job-notices">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <img src="https://img.icons8.com/bubbles/45/000000/briefcase.png"/>
             </div>

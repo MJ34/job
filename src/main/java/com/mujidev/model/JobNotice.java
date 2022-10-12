@@ -2,6 +2,7 @@ package com.mujidev.model;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
@@ -11,7 +12,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "JOB_NOTICE")
+@Table(name = "hrm_job")
 public class JobNotice {
 
     @Id
@@ -35,6 +36,7 @@ public class JobNotice {
     @Column(name = "numOfBeTaken", nullable = false)
     private Integer numOfBeTaken = 0;
 
+    private Date expDate;
 
     @NotBlank
     @Column(name = "workType", nullable = false)
@@ -92,7 +94,7 @@ public class JobNotice {
 
     public void setNumOfBeTaken(Integer numOfBeTaken) {
         this.numOfBeTaken = numOfBeTaken;
-    }
+    }    
 
     public String getWorkType() {
         return workType;
@@ -124,5 +126,13 @@ public class JobNotice {
 
     public void setJobApplies(List<JobApply> jobApplies) {
         this.jobApplies = jobApplies;
+    }
+
+    public Date getExpDate() {
+        return expDate;
+    }
+
+    public void setExpDate(Date expDate) {
+        this.expDate = expDate;
     }
 }
